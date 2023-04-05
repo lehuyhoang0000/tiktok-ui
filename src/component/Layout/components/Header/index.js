@@ -16,7 +16,22 @@ const cx = classNames.bind(styles)
 const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
-        title: 'English'
+        title: 'English',
+        language: {
+            title: 'Language',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English'
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt'
+                },
+            ]
+        }
     },
     {
         icon: <FontAwesomeIcon icon={faQuestionCircle} />,
@@ -37,6 +52,18 @@ function Header() {
             setSearchResult([])
         }, 0)
     }, []);
+
+    // Hangle logic
+
+    const handleMenuchange = (menuItem) => {
+        console.log(menuItem)
+        switch (menuItem.type) {
+            case 'language':
+                //Handle change language
+                break;
+            default:
+        }
+    }
 
     return (
         <header className={cx('wrapper')}>
@@ -83,6 +110,7 @@ function Header() {
                     </Button>
                     <Menu
                         items={MENU_ITEMS}
+                        onChange={handleMenuchange}
                     >
                         <button className={cx('more-icon')}  >
                             <FontAwesomeIcon icon={faEllipsisVertical} />

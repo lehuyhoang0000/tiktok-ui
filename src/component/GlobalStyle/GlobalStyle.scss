@@ -10,11 +10,13 @@
 
     --default-layout-header-height: 60px;
     --default-layout-width: 1150px;
+    --default-layout-horizonal-spacer: 24px;
 }
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 html {
