@@ -16,7 +16,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    // font-family: Arial, Helvetica, sans-serif;
 }
 
 html {
@@ -24,6 +24,7 @@ html {
 }
 
 body {
+    font-family: 'ProximaNova', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
@@ -40,6 +41,32 @@ input,
 a[href] {
     color: var(--text-color);
     text-decoration: none;
+}
+
+// fonts custom
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/font/Proxima-Nova-Regular.woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/font/Proxima-Nova-Semibold.woff2');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: ProximaNova;
+    src: url('/assets/font/Proxima-Nova-Bold.woff');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: SofiaPro;
+    src: url('/assets/font/sofiapro-bold.woff');
+    font-weight: 700;
 }
 
 // custom tippy tooltips
