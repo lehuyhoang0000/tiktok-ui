@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
-
 import classNames from 'classnames/bind';
-import styles from './Search.module.scss';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
+
+import * as searchSevices from '~/apisServices/searchServices';
+import styles from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/component/Popper';
 import { SearchIcon } from '~/component/Icons';
 import { useDebounce } from '~/hooks';
@@ -29,19 +30,16 @@ function Search() {
             setSearchResult([]); //khi xóa hết trong tìm kiếm sẽ set lại kết quả thành mảng rỗng
             return;
         }
-        setLoading(true);
+        const fetchApis = async () => {
+            setLoading(true);
 
+            const result = await searchSevices.search(debounced);
+            setSearchResult(result);
+
+            setLoading(false);
+        };
+        fetchApis();
         //`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`
-
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`) //encodeURIComponent dùng để cho ng dùng nhập vào không bị ảnh hưởng các kí tự đặc biệt như & % =, những kí tự nhập vào sẽ bị mã hóa
-            .then((res) => res.json()) // chuyển đổi dữ liệu
-            .then((res) => {
-                setSearchResult(res.data); // data ở đây chính là 1 mảng trong apis
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
     }, [debounced]);
 
     const handleClear = () => {
