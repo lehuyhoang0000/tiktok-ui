@@ -34,8 +34,8 @@ function Search() {
             setLoading(true);
 
             const result = await searchSevices.search(debounced);
-            setSearchResult(result);
 
+            setSearchResult(result);
             setLoading(false);
         };
         fetchApis();
@@ -50,6 +50,14 @@ function Search() {
 
     const handleResult = () => {
         setShowResult(false);
+    };
+
+    const handleChange = (e) => {
+        const searchValue = e.target.value;
+        // nếu searchValue trả về khi người dùng gõ dấu cách thì sẽ không nhập được dấu cách hoặc là khoảng trống khi đó phải nhập chữ số xong mới nhập được dấu cách
+        if (!searchValue.startsWith(' ')) {
+            setSearchValue(searchValue);
+        }
     };
 
     return (
@@ -75,7 +83,7 @@ function Search() {
                     type="text"
                     placeholder="Search accounts and videos"
                     spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={handleChange}
                     onFocus={() => setShowResult(true)}
                 />
                 {!!searchValue && !loading && (
@@ -84,7 +92,7 @@ function Search() {
                     </button>
                 )}
                 {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-                <button className={cx('search-btn')}>
+                <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}> {/* ngăn chặn hành động bấm chuột xuống focus vào ô tìm kiếm */}
                     <SearchIcon />
                 </button>
             </div>
