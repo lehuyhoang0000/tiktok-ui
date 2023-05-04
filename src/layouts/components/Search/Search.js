@@ -19,12 +19,12 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
-    const debounced = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             // .trim() để loại bỏ những dấu cách đầu cuối, phần này giúp cho ô search khi bấm dấu cách không bị lỗi
             // logic để cho apis hiểu nếu khi dùng search value trả về chuỗi rỗng, thì sẽ bị lỗi, phần này giúp thoát khỏi bị lỗi
             setSearchResult([]); //khi xóa hết trong tìm kiếm sẽ set lại kết quả thành mảng rỗng
@@ -33,14 +33,14 @@ function Search() {
         const fetchApis = async () => {
             setLoading(true);
 
-            const result = await searchSevices.search(debounced);
+            const result = await searchSevices.search(debouncedValue);
 
             setSearchResult(result);
             setLoading(false);
         };
         fetchApis();
-        //`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`
-    }, [debounced]);
+        //`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debouncedValue)}&type=less`
+    }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');
