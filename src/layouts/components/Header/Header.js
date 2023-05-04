@@ -83,7 +83,7 @@ const userMenu = [
 ];
 
 function Header() {
-    const currentUser = true;
+    const currentUser = true; // khi chuyển thành false sẽ hiện nút bấm login
 
     // Hangle logic
 
